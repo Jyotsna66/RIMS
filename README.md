@@ -52,7 +52,7 @@ Steps to Set Up
 
 1. Clone the Repository:
 
-git clone https://github.com/your-username/RIMS.git
+git clone [https://github.com/your-username/RIMS.git](https://github.com/Jyotsna66/RIMS.git)
 cd RIMS
 
 2. Set Up a Virtual Environment (Optional but Recommended):
