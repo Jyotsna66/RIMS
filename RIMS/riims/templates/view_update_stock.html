@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+
+    <title>View and Update Stock</title>
+    <style>
+        body {
+            background-color: #080710;
+            color: aliceblue;
+        }
+        .table {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        thead {
+            position: sticky;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <header class="d-flex justify-content-between align-items-center">
+            <h2>View and Update Stock</h2>
+            <a href="{% url 'DailyStock' %}" class="btn btn-secondary">Back to Stock Entry</a>
+        </header>
+
+        <!-- Table for Viewing and Updating Records -->
+        <div class="table-responsive mt-4">
+            <table class="table table-striped table-dark">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Item Type</th>
+                        <th>Item Name</th>
+                        <th>Unit</th>
+                        <th>Closing</th>
+                        <th>Required</th>
+                        <th>Delivered</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for record in stock_records %}
+                    <tr>
+                        <td>{{ record.date }}</td>
+                        <td>{{ record.item_type }}</td>
+                        <td>{{ record.item_name }}</td>
+                        <td>{{ record.unit }}</td>
+                        <td>{{ record.closing }}</td>
+                        <td>{{ record.required }}</td>
+                        <td>{{ record.delivered }}</td>
+                        <td>
+                            <!-- Update and Delete Buttons -->
+                            <a href="{% url 'update_stock' record.id %}" class="btn btn-primary btn-sm">Update</a>
+                            <a href="{% url 'delete_stock' record.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this record?')">Delete</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="8" class="text-center">No records found.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+</body>
+</html>

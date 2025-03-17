@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    />
+    <title>Daily Purchase Entry</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background-color: #b3d9ff;
+        color: #080710;
+      }
+      .w-fit {
+        width: fit-content;
+      }
+      .tableParent {
+        overflow: auto;
+        height: calc(100vh - 200px);
+      }
+      .table {
+        background-color: rgba(255, 255, 255, 0.13);
+      }
+      thead {
+        position: sticky;
+        top: 0;
+      }
+      th {
+        white-space: nowrap;
+      }
+      .inputTd {
+        min-width: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container position-relative">
+      <header class="p-2 bg-inherit sticky-top">
+        <div class="d-flex flex-row align-items-center justify-content-between">
+          <h3>Daily Purchase Entry</h3>
+          <div>
+            <a href="{% url 'home' %}" class="btn btn-secondary mr-3"
+              >Main Menu</a
+            >
+            <a href="{% url 'logout' %}" class="btn btn-secondary">Log Out</a>
+          </div>
+        </div>
+        <div
+          class="form-group d-flex flex-row align-items-center justify-content-start"
+        >
+          <label for="date" class="mr-3">Select Date:</label>
+          <input
+            type="date"
+            class="form-control w-fit mr-3"
+            id="date"
+            name="date"
+          />
+          <button
+            type="button"
+            class="btn btn-secondary"
+            onclick="viewAndUpdate()"
+          >
+            View and Update
+          </button>
+        </div>
+      </header>
+      <main>
+        {% comment %} <form action="{% url 'daily_purchase' %}" method="POST">
+          {% csrf_token %}
+          <div class="tableParent position-relative table-responsive">
+            <table class="table">
+              <thead class="thead-light">
+                <tr>
+                  <th>Item Type</th>
+                  <th>Item Name</th>
+                  <th>Unit</th>
+                  <th>Qty</th>
+                  <th>Unit Price</th>
+                  <th>Tax</th>
+                  <th>Total Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Daily Nonveg</td>
+                  <td>Chicken</td>
+                  <td>Kg</td>
+                  <td class="inputTd">
+                    <input type="number" class="form-control" name="quantity" />
+                  </td>
+                  <td class="inputTd">
+                    <input
+                      type="number"
+                      class="form-control"
+                      name="price_per_unit"
+                    />
+                  </td>
+                  <td class="inputTd">
+                    <input type="number" class="form-control" name="tax" />
+                  </td>
+                  <td class="inputTd">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="total_price"
+                      disabled
+                    />
+                  </td>
+                </tr>
+              </tbody>
+              <tbody>
+                <tr>
+                  <td>Daily Nonveg</td>
+                  <td>Chicken</td>
+                  <td>Kg</td>
+                  <td class="inputTd">
+                    <input type="number" class="form-control" name="quantity" />
+                  </td>
+                  <td class="inputTd">
+                    <input
+                      type="number"
+                      class="form-control"
+                      name="price_per_unit"
+                    />
+                  </td>
+                  <td class="inputTd">
+                    <input type="number" class="form-control" name="tax" />
+                  </td>
+                  <td class="inputTd">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="total_price"
+                      disabled
+                    />
+                  </td>
+                </tr>
+              </tbody>
+              <tbody>
+                <tr>
+                  <td>Daily Nonveg</td>
+                  <td>Chicken</td>
+                  <td>Kg</td>
+                  <td class="inputTd">
+                    <input type="number" class="form-control" name="quantity" />
+                  </td>
+                  <td class="inputTd">
+                    <input
+                      type="number"
+                      class="form-control"
+                      name="price_per_unit"
+                    />
+                  </td>
+                  <td class="inputTd">
+                    <input type="number" class="form-control" name="tax" />
+                  </td>
+                  <td class="inputTd">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="total_price"
+                      disabled
+                    />
+                  </td>
+                </tr>
+              </tbody>
+              <tbody>
+                <tr>
+                  <td>Daily Nonveg</td>
+                  <td>Chicken</td>
+                  <td>Kg</td>
+                  <td class="inputTd">
+                    <input type="number" class="form-control" name="quantity" />
+                  </td>
+                  <td class="inputTd">
+                    <input
+                      type="number"
+                      class="form-control"
+                      name="price_per_unit"
+                    />
+                  </td>
+                  <td class="inputTd">
+                    <input type="number" class="form-control" name="tax" />
+                  </td>
+                  <td class="inputTd">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="total_price"
+                      disabled
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="ml-1 mt-3">
+            <button
+              type="submit"
+              class="btn btn-secondary"
+              name="action"
+              value="save"
+            >
+              Save
+            </button>
+            <button
+              type="submit"
+              class="btn btn-secondary ml-3"
+              name="action"
+              value="submit"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+        {% if form.errors %}
+        <ul class="errorlist">
+          {% for field, errors in form.errors.items %} {% for error in errors %}
+          <li>{{ field|capfirst }}: {{ error }}</li>
+          {% endfor %} {% endfor %}
+        </ul>
+        {% endif %} {% endcomment %}
+        <form action="{% url 'daily_purchase' %}" method="POST">
+          {% csrf_token %}
+          <div class="tableParent position-relative table-responsive">
+            <table class="table">
+              <thead class="thead-light">
+                <tr>
+                  <th>Item Type</th>
+                  <th>Item Name</th>
+                  <th>Unit</th>
+                  <th>Qty</th>
+                  <th>Unit Price</th>
+                  <th>Tax</th>
+                  <th>Total Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Example row, repeat as needed -->
+                <tr>
+                  <td>Daily Nonveg</td>
+                  <td>Chicken</td>
+                  <td>Kg</td>
+                  <td class="inputTd">
+                    <input type="number" class="form-control" name="quantity[]" />
+                  </td>
+                  <td class="inputTd">
+                    <input type="number" class="form-control" name="unit_price[]" />
+                  </td>
+                  <td class="inputTd">
+                    <input type="number" class="form-control" name="tax[]" />
+                  </td>
+                  <td class="inputTd">
+                    <input type="number" class="form-control" name="total_price[]" />
+                  </td>
+                </tr>
+                <!-- Repeat similar <tr> elements for other rows -->
+              </tbody>
+            </table>
+          </div>
+          <div class="ml-1 mt-3">
+            <button type="submit" class="btn btn-secondary">Save</button>
+            <button type="submit" class="btn btn-secondary ml-3">Submit</button>
+          </div>
+        </form>
+      </main>
+    </div>
+
+    <script>
+      function viewAndUpdate() {
+        alert("Viewing and updating data."); // Placeholder for data fetching logic
+      }
+
+      // Function to calculate and display the total price
+      function calculateTotalPrice(row) {
+        const quantity =
+          parseFloat(row.querySelector('[name="quantity"]').value) || 0;
+        const pricePerUnit =
+          parseFloat(row.querySelector('[name="price_per_unit"]').value) || 0;
+        const tax = parseFloat(row.querySelector('[name="tax"]').value) || 0;
+
+        const totalPrice = quantity * pricePerUnit + tax;
+        row.querySelector('[name="total_price"]').value = totalPrice.toFixed(2);
+      }
+
+      // Attach event listeners to each row of inputs
+      document.querySelectorAll("tbody").forEach((tbody) => {
+        tbody.querySelectorAll("input").forEach((input) => {
+          input.addEventListener("input", () => calculateTotalPrice(tbody));
+        });
+      });
+    </script>
+  </body>
+</html>
